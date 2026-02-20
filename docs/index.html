@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Consciousness Study</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      /* Prevent outer scrolling so only the iframe scrolls */
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+      background: #fff;
+    }
+    /* Use dynamic viewport height on mobile when available */
+    .frame {
+      width: 100vw;
+      height: 100dvh;  /* modern mobile browsers */
+      height: 100vh;   /* fallback */
+      border: 0;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <iframe
+    class="frame"
+    src="https://script.google.com/macros/s/AKfycbxb-3_Masf-mmydHs-v16K7r1tJdk0__Is2pFHFxpsuux84w1L0QZMGHJ82v0laMBq5YA/exec"
+    scrolling="yes"
+    allow="fullscreen"
+    referrerpolicy="no-referrer"
+  ></iframe>
+
+  <script>
+    // Extra robustness for some mobile browsers: force iframe height to innerHeight
+    function fit() {
+      const f = document.querySelector('.frame');
+      if (!f) return;
+      f.style.height = window.innerHeight + 'px';
+    }
+    window.addEventListener('resize', fit);
+    fit();
+  </script>
+</body>
+</html>
