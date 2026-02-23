@@ -3,22 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Consciousness Study</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      /* Prevent outer scrolling so only the iframe scrolls */
-      overflow: hidden;
+      overflow: hidden; /* prevent outer page scroll */
       height: 100%;
       width: 100%;
       background: #fff;
     }
-    /* Use dynamic viewport height on mobile when available */
+
     .frame {
       width: 100vw;
-      height: 100dvh;  /* modern mobile browsers */
-      height: 100vh;   /* fallback */
+
+      /* Fallback first */
+      height: 100vh;
+
+      /* Preferred on modern mobile browsers */
+      height: 100dvh;
+
       border: 0;
       display: block;
     }
@@ -26,21 +29,26 @@
 </head>
 <body>
   <iframe
+    id="surveyFrame"
     class="frame"
-    src="https://script.google.com/macros/s/AKfycby012FkuDfOYtlIYBBFymubpKdVNMjlo2ZgT8xvHvRvNS0_j3uWC2WX6rbBs7fRt99ndg/exec"
     scrolling="yes"
     allow="fullscreen"
     referrerpolicy="no-referrer"
   ></iframe>
 
   <script>
-    // Extra robustness for some mobile browsers: force iframe height to innerHeight
+    const APP_URL = "https://script.google.com/macros/s/AKfycbzWc777jtlkoYAGX_lHrIVgBVaYLcc2331_Jc6nAS29UsXTnLopBwYReFMSQghKHyznog/exec";
+
+    // Forward Prolific parameters from the GitHub Pages URL to the Apps Script URL
+    // Example forwarded params: ?PROLIFIC_PID=...&STUDY_ID=...&SESSION_ID=...
+    const frame = document.getElementById("surveyFrame");
+    frame.src = APP_URL + window.location.search;
+
+    // Extra mobile robustness: force exact visible height
     function fit() {
-      const f = document.querySelector('.frame');
-      if (!f) return;
-      f.style.height = window.innerHeight + 'px';
+      frame.style.height = window.innerHeight + "px";
     }
-    window.addEventListener('resize', fit);
+    window.addEventListener("resize", fit);
     fit();
   </script>
 </body>
