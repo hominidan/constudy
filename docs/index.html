@@ -7,7 +7,7 @@
     html, body {
       margin: 0;
       padding: 0;
-      overflow: hidden; /* prevent outer page scroll */
+      overflow: hidden;
       height: 100%;
       width: 100%;
       background: #fff;
@@ -15,13 +15,8 @@
 
     .frame {
       width: 100vw;
-
-      /* Fallback first */
       height: 100vh;
-
-      /* Preferred on modern mobile browsers */
       height: 100dvh;
-
       border: 0;
       display: block;
     }
@@ -39,15 +34,16 @@
   <script>
     const APP_URL = "https://script.google.com/macros/s/AKfycbyY_XgxRaO0a3aGaWzM50o-OLmbP6m4ejH67Z0al4XdKQOf0WKQwUOeWm9BS_TsZGQmag/exec";
 
-    // Forward Prolific parameters from the GitHub Pages URL to the Apps Script URL
-    // Example forwarded params: ?PROLIFIC_PID=...&STUDY_ID=...&SESSION_ID=...
+    // Forward any Prolific parameters from the GitHub Pages URL to the Apps Script app.
+    // This keeps testing possible with no query params, while live Prolific runs will carry
+    // PROLIFIC_PID, STUDY_ID, and SESSION_ID straight into the survey.
     const frame = document.getElementById("surveyFrame");
     frame.src = APP_URL + window.location.search;
 
-    // Extra mobile robustness: force exact visible height
     function fit() {
       frame.style.height = window.innerHeight + "px";
     }
+
     window.addEventListener("resize", fit);
     fit();
   </script>
